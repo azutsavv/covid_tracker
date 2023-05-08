@@ -1,4 +1,4 @@
-import 'package:covid_tracker/login_page.dart';
+import 'package:covid_tracker/splash_sreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,14 +10,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
       primarySwatch: Colors.blue,
       ),
-      initialRoute: 'lauch',
+      initialRoute: 'splash',
       routes: {
-        'lauch': (context) => login_page(),
+        'splash': (context) => SplashScreen(),
       },
     );
   }
