@@ -43,15 +43,33 @@ class _worlds_statsState extends State<worlds_stats>
                     ),
                     const SizedBox(height: 10,),
 
-                  Card(
-                    color: Colors.grey.shade800,
-                    child: Column(
-                    children: [
-                      reuasble_row(title: 'Total', value: '200'),
-                      reuasble_row(title: 'Total', value: '200'),
-                      reuasble_row(title: 'Total' , value: '200'),
-                    ],
-                  ),)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Card(
+                      color: Colors.grey.shade800,
+                      child: Column(
+                      children: [
+                        reuasble_row(title: 'Total', value: '200'),
+                        reuasble_row(title: 'Total', value: '200'),
+                        reuasble_row(title: 'Total' , value: '200'),
+                      ],
+                    ),),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
+
+                  Padding(
+                    padding:const EdgeInsets.only(left: 10, right: 10),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      decoration: BoxDecoration(
+                        color: Colors.tealAccent.shade200,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: Text('Track Countries'),
+                      ),
+                    ),
+                  )
                     
                 ],
               )),
@@ -79,8 +97,7 @@ class reuasble_row extends StatelessWidget {
 
         ),
 
-        SizedBox(height:1,),
-        Divider(),
+        const Divider(),
       ],
     ),
     
