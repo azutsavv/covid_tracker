@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class worlds_stats extends StatefulWidget {
+  static const routename = '/worlds_stats';
   const worlds_stats({super.key});
 
   @override
@@ -19,7 +20,7 @@ class _worlds_statsState extends State<worlds_stats>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(25, 25, 25, 1),
+        backgroundColor: const Color.fromRGBO(25, 25, 25, 1),
         body: SafeArea(
           child: Padding(
               padding: const EdgeInsets.all(10),
@@ -39,26 +40,28 @@ class _worlds_statsState extends State<worlds_stats>
                         "Total": 20,
                         "Recovered": 15,
                         "Active": 5,
-                      }
-                    ),
-                    const SizedBox(height: 10,),
-
+                      }),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Card(
                       color: Colors.grey.shade800,
                       child: Column(
-                      children: [
-                        reuasble_row(title: 'Total', value: '200'),
-                        reuasble_row(title: 'Total', value: '200'),
-                        reuasble_row(title: 'Total' , value: '200'),
-                      ],
-                    ),),
+                        children: [
+                          reuasble_row(title: 'Total', value: '200'),
+                          reuasble_row(title: 'Total', value: '200'),
+                          reuasble_row(title: 'Total', value: '200'),
+                        ],
+                      ),
+                    ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
-
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.04,
+                  ),
                   Padding(
-                    padding:const EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.05,
                       decoration: BoxDecoration(
@@ -70,7 +73,6 @@ class _worlds_statsState extends State<worlds_stats>
                       ),
                     ),
                   )
-                    
                 ],
               )),
         ));
@@ -79,29 +81,30 @@ class _worlds_statsState extends State<worlds_stats>
 
 class reuasble_row extends StatelessWidget {
   String title, value;
-  reuasble_row({super.key , required this.title , required this.value});
+  reuasble_row({super.key, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.all(10),
-    
-    child: Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-          children: [
-            Text(title, style: TextStyle(color: Colors.white70),),
-            Text(value, style: TextStyle(color: Colors.white70),),
-          ],
-
-        ),
-
-        const Divider(),
-      ],
-    ),
-    
-    
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: TextStyle(color: Colors.white70),
+              ),
+              Text(
+                value,
+                style: TextStyle(color: Colors.white70),
+              ),
+            ],
+          ),
+          const Divider(),
+        ],
+      ),
     );
   }
 }

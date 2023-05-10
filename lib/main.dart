@@ -1,4 +1,5 @@
 import 'package:covid_tracker/splash_sreen.dart';
+import 'package:covid_tracker/world_state.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       initialRoute: 'splash',
       routes: {
         'splash': (context) => SplashScreen(),
+        'world': (context) => worlds_stats(),
       },
     );
   }
