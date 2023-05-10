@@ -12,6 +12,8 @@ class state_services {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       return WorldStatus.fromJson(data);
-    } else {}
+    } else {
+      throw Exception('Error');
+    }
   }
 }

@@ -1,8 +1,12 @@
+import 'package:covid_tracker/services/states_services.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pie_chart/pie_chart.dart';
+
+import 'models/world_status.dart';
 
 class worlds_stats extends StatefulWidget {
   static const routename = '/worlds_stats';
@@ -19,6 +23,7 @@ class _worlds_statsState extends State<worlds_stats>
         ..repeat();
   @override
   Widget build(BuildContext context) {
+    state_services _state_services = state_services();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(25, 25, 25, 1),
         body: SafeArea(
@@ -29,20 +34,34 @@ class _worlds_statsState extends State<worlds_stats>
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.01,
                   ),
-                  const PieChart(
-                      // centerTextStyle: TextStyle(
-                      //   color: Colors.white,
-                      //   fontSize: 20,
-                      //   fontWeight: FontWeight.bold,
-                      // ),
-                      animationDuration: Duration(milliseconds: 1500),
+                  FutureBuilder(
+                      future: _state_services.fetchworldstaterecords(),
+                      builder: (context, AsyncSnapshot<WorldStatus> snapshot) {
+                        if (!snapshot.hasData) {
+                          return Expanded(
+                              flex: 1,
+                              child: SpinKitFadingCircle(
+                                color: Colors.white,
+                                size: 50,
+                                controller: _controller,
+                              ));
+                        } else {
+                          return Column(
+                            children: [
+
+                      PieChart(
+                        chartType: ChartType.ring,
+                        chartValuesOptions: const ChartValuesOptions(
+                          showChartValuesInPercentage: true,
+                        ),
+                      animationDuration: const Duration(milliseconds: 1200),
                       dataMap: {
-                        "Total": 20,
-                        "Recovered": 15,
-                        "Active": 5,
+                        "Total": double.parse(snapshot.data!.cases!.toString()),
+                        "Recovered": double.parse(snapshot.data!.recovered!.toString()),
+                        "Active": double.parse(snapshot.data!.active!.toString()),
                       }),
-                  const SizedBox(
-                    height: 10,
+                   SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.04,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
@@ -50,26 +69,42 @@ class _worlds_statsState extends State<worlds_stats>
                       color: Colors.grey.shade800,
                       child: Column(
                         children: [
-                          reuasble_row(title: 'Total', value: '200'),
-                          reuasble_row(title: 'Total', value: '200'),
-                          reuasble_row(title: 'Total', value: '200'),
+                          reuasble_row(
+                            title: 'Total', 
+                            value: snapshot.data!.cases!.toString(),),
+                          reuasble_row(
+                            title: "Active", 
+                            value: snapshot.data!.active!.toString()),
+                          reuasble_row(
+                            title: "Recovered", 
+                            value: snapshot.data!.recovered!.toString()),
                         ],
                       ),
                     ),
                   ),
+                              
+
+                            ],
+                          );
+                        }
+                      }),
+                 
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.04,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      decoration: BoxDecoration(
-                        color: Colors.tealAccent.shade200,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Text('Track Countries'),
+                    child: GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, 'trackcountries'),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        decoration: BoxDecoration(
+                          color: Colors.tealAccent.shade200,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(
+                          child: Text('Track Countries'),
+                        ),
                       ),
                     ),
                   )
@@ -94,11 +129,11 @@ class reuasble_row extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(color: Colors.white70),
+                style: const TextStyle(color: Colors.white70),
               ),
               Text(
                 value,
-                style: TextStyle(color: Colors.white70),
+                style: const TextStyle(color: Colors.white70),
               ),
             ],
           ),
