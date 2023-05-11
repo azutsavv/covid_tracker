@@ -18,11 +18,11 @@ class _countries_listState extends State<countries_list> {
   Widget build(BuildContext context) {
     state_services _state_services = state_services();
     return Scaffold(
-      backgroundColor:const Color.fromRGBO(25, 25, 25, 1),
+      backgroundColor: const Color.fromRGBO(25, 25, 25, 1),
       appBar: AppBar(
-        backgroundColor:const Color.fromRGBO(25, 25, 25, 1),
+        backgroundColor: const Color.fromRGBO(25, 25, 25, 1),
         elevation: 0,
-        ),
+      ),
       body: SafeArea(
           child: Column(
         children: [
@@ -30,8 +30,12 @@ class _countries_listState extends State<countries_list> {
             padding:
                 const EdgeInsets.only(left: 10.0, right: 10, top: 8, bottom: 8),
             child: TextFormField(
-              
               controller: serachcontroller,
+              onChanged: (value){
+                setState(() {
+                  
+                });
+              },
               decoration: InputDecoration(
                   fillColor: Colors.white70,
                   filled: true,
@@ -40,34 +44,81 @@ class _countries_listState extends State<countries_list> {
                       borderRadius: BorderRadius.circular(10))),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05),
-            child: Expanded(
-              child: FutureBuilder(
-                future: _state_services.countriesListApi(),
-                builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-                  if (!snapshot.hasData) {
-                    return Column(
-                      children:  [
-                        const Text('Data is being fetched', style: TextStyle(
-                          color: Colors.white60
-                        ), ),
-                        SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-                        const SpinKitFadingCircle(
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.03,
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: _state_services.countriesListApi(),
+              builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                if (!snapshot.hasData) {
+                  return Column(
+                    children: [
+                      const Text(
+                        'Data is being fetched',
+                        style: TextStyle(color: Colors.white60),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      const SpinKitFadingCircle(
                         size: 50,
                         color: Colors.white60,
-                        ),
-                      ],
-                    );
-                  } else {
-                    return ListView.builder(itemBuilder: (context, index) {
-                      return Column(
-                        children: [],
-                      );
-                    });
-                  }
-                },
-              ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        String name = snapshot.data![index]['country'];
+                        if (serachcontroller.text.isEmpty) {
+                          return Column(
+                            children: [
+                              ListTile(
+                                subtitle: Text(
+                                    snapshot.data![index]["countryInfo"]
+                                        ["iso3"],
+                                    style:
+                                        const TextStyle(color: Colors.white70)),
+                                title: Text(snapshot.data![index]['country'],
+                                    style:
+                                        const TextStyle(color: Colors.white70)),
+                                leading: Image(
+                                    height: 50,
+                                    image: NetworkImage(snapshot.data![index]
+                                        ["countryInfo"]["flag"])),
+                              ),
+                            ],
+                          );
+                        } else if (name
+                            .toLowerCase()
+                            .contains(serachcontroller.text.toLowerCase())) {
+                          return Column(
+                            children: [
+                              const Text(
+                                'Data is being fetched',
+                                style: TextStyle(color: Colors.white60),
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02,
+                              ),
+                              const SpinKitFadingCircle(
+                                size: 50,
+                                color: Colors.white60,
+                              ),
+                            ],
+                          );
+                        } else {
+                          return Container(
+                            alignment: Alignment.center,
+                            child:const  Text('No Matches'),
+                          );
+                        }
+                      });
+                }
+              },
             ),
           ),
         ],
