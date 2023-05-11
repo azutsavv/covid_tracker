@@ -1,5 +1,5 @@
+import 'package:covid_tracker/countries_list.dart';
 import 'package:covid_tracker/splash_sreen.dart';
-import 'package:covid_tracker/track_countires.dart';
 import 'package:covid_tracker/world_state.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'splash': (context) => const SplashScreen(),
         'world': (context) => const worlds_stats(),
-        'trackcountries' :(context) =>const  Track_countires(),
+        'trackcountries' :(context) =>const  countries_list(),
       },
     );
   }
