@@ -112,12 +112,12 @@ class _countries_listState extends State<countries_list> {
                                     image: NetworkImage(snapshot.data![index]
                                         ["countryInfo"]["flag"])),
                               ),
+                              const Divider(),
                             ],
                           );
                         } else {
                           return Container(
-                            alignment: Alignment.center,
-                            child:const  Text('No Matches'),
+                        
                           );
                         }
                       });
