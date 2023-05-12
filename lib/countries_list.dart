@@ -1,3 +1,4 @@
+import 'package:covid_tracker/details_screen.dart';
 import 'package:covid_tracker/services/states_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -73,47 +74,83 @@ class _countries_listState extends State<countries_list> {
                         if (serachcontroller.text.isEmpty) {
                           return Column(
                             children: [
-                              ListTile(
-                                
-                                subtitle: Text(
-                                    snapshot.data![index]["cases"].toString(),
-                                    style:
-                                        const TextStyle(color: Colors.white70)),
-                                title: Text(snapshot.data![index]['country'],
-                                    style:
-                                        const TextStyle(color: Colors.white70)),
-                                leading: Image(
-                                  // fit: BoxFit.fill,
-                                   width: MediaQuery.of(context).size.width * 0.2,
-                                    //height: 50,
-                                    image: NetworkImage(snapshot.data![index]
-                                        ["countryInfo"]["flag"])),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(context,
+                                   MaterialPageRoute(builder:(context) => 
+                                   details_screen(
+                                      name: snapshot.data![index]['country'],
+                                      image: snapshot.data![index]["countryInfo"]["flag"],
+                                      totalcases: snapshot.data![index]["cases"],
+                                      totalRecoverd: snapshot.data![index]["recovered"],
+                                      active: snapshot.data![index]["active"],
+                                      critical: snapshot.data![index]["critical"],
+                                      todayRecoeved: snapshot.data![index]["todayRecovered"],
+                                      test: snapshot.data![index]["tests"],
+                                    ),
+                                    )
+                                    );
+                                },
+                                child: ListTile(
+                                  
+                                  subtitle: Text(
+                                      snapshot.data![index]["cases"].toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white70)),
+                                  title: Text(snapshot.data![index]['country'],
+                                      style:
+                                          const TextStyle(color: Colors.white70)),
+                                  leading: Image(
+                                    // fit: BoxFit.fill,
+                                     width: MediaQuery.of(context).size.width * 0.2,
+                                      //height: 50,
+                                      image: NetworkImage(snapshot.data![index]
+                                          ["countryInfo"]["flag"])),
+                                ),
                               ),
                             ],
                           );
                         } else if (name
                             .toLowerCase()
                             .contains(serachcontroller.text.toLowerCase())) {
-                          return Column(
-                            children: [
-                              ListTile(
-                                
-                                subtitle: Text(
-                                    snapshot.data![index]["cases"].toString(),
-                                    style:
-                                        const TextStyle(color: Colors.white70)),
-                                title: Text(snapshot.data![index]['country'],
-                                    style:
-                                        const TextStyle(color: Colors.white70)),
-                                leading: Image(
-                                  // fit: BoxFit.fill,
-                                   width: MediaQuery.of(context).size.width * 0.2,
-                                    //height: 50,
-                                    image: NetworkImage(snapshot.data![index]
-                                        ["countryInfo"]["flag"])),
-                              ),
-                              const Divider(),
-                            ],
+                          return InkWell(
+                            onTap: () {
+                                  Navigator.push(context,
+                                   MaterialPageRoute(builder:(context) =>
+                                  details_screen(
+                                      name: snapshot.data![index]['country'],
+                                      image: snapshot.data![index]["countryInfo"]["flag"],
+                                      totalcases: snapshot.data![index]["cases"],
+                                      totalRecoverd: snapshot.data![index]["recovered"],
+                                      active: snapshot.data![index]["active"],
+                                      critical: snapshot.data![index]["critical"],
+                                      todayRecoeved: snapshot.data![index]["todayRecovered"],
+                                      test: snapshot.data![index]["tests"],
+                                    ),
+                                   )
+                                   );
+                                },
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  
+                                  subtitle: Text(
+                                      snapshot.data![index]["cases"].toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white70)),
+                                  title: Text(snapshot.data![index]['country'],
+                                      style:
+                                          const TextStyle(color: Colors.white70)),
+                                  leading: Image(
+                                    // fit: BoxFit.fill,
+                                     width: MediaQuery.of(context).size.width * 0.2,
+                                      //height: 50,
+                                      image: NetworkImage(snapshot.data![index]
+                                          ["countryInfo"]["flag"])),
+                                ),
+                                const Divider(),
+                              ],
+                            ),
                           );
                         } else {
                           return Container(
