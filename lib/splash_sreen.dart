@@ -23,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.dispose();
   }
 
+  @override
   void initState() {
     super.initState();
 
@@ -36,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(25, 25, 25, 1),
+      backgroundColor:const Color.fromRGBO(25, 25, 25, 1),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: SafeArea(

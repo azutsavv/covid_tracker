@@ -1,8 +1,5 @@
 import 'package:covid_tracker/services/states_services.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pie_chart/pie_chart.dart';
 
@@ -48,62 +45,66 @@ class _worlds_statsState extends State<worlds_stats>
                         } else {
                           return Column(
                             children: [
-
-                      PieChart(
-                        legendOptions: const LegendOptions(
-                          legendTextStyle: TextStyle(
-                            color: Colors.white70,
-                          )
-                        ),
-                        centerTextStyle: const TextStyle(
-                          color: Colors.white70
-                        ),
-                        chartType: ChartType.ring,
-                        chartValuesOptions: const ChartValuesOptions(
-                          showChartValuesInPercentage: true,
-                        ),
-                      animationDuration: const Duration(milliseconds: 1200),
-                      dataMap: {
-                        "Total": double.parse(snapshot.data!.cases!.toString()),
-                        "Recovered": double.parse(snapshot.data!.recovered!.toString()),
-                        "Active": double.parse(snapshot.data!.active!.toString()),
-                      }),
-                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.04,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Card(
-                      color: Colors.grey.shade800,
-                      child: Column(
-                        children: [
-                          reuasble_row(
-                            title: 'Total', 
-                            value: snapshot.data!.cases!.toString(),),
-                          reuasble_row(
-                            title: "Active", 
-                            value: snapshot.data!.active!.toString()),
-                          reuasble_row(
-                            title: "Recovered", 
-                            value: snapshot.data!.recovered!.toString()),
-                        ],
-                      ),
-                    ),
-                  ),
-                              
-
+                              PieChart(
+                                  legendOptions: const LegendOptions(
+                                      legendTextStyle: TextStyle(
+                                    color: Colors.white70,
+                                  )),
+                                  centerTextStyle:
+                                      const TextStyle(color: Colors.white70),
+                                  chartType: ChartType.ring,
+                                  chartValuesOptions: const ChartValuesOptions(
+                                    showChartValuesInPercentage: true,
+                                  ),
+                                  animationDuration:
+                                      const Duration(milliseconds: 1200),
+                                  dataMap: {
+                                    "Total": double.parse(
+                                        snapshot.data!.cases!.toString()),
+                                    "Recovered": double.parse(
+                                        snapshot.data!.recovered!.toString()),
+                                    "Active": double.parse(
+                                        snapshot.data!.active!.toString()),
+                                  }),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.04,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
+                                child: Card(
+                                  color: Colors.grey.shade800,
+                                  child: Column(
+                                    children: [
+                                      reuasble_row(
+                                        title: 'Total',
+                                        value: snapshot.data!.cases!.toString(),
+                                      ),
+                                      reuasble_row(
+                                          title: "Active",
+                                          value: snapshot.data!.active!
+                                              .toString()),
+                                      reuasble_row(
+                                          title: "Recovered",
+                                          value: snapshot.data!.recovered!
+                                              .toString()),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           );
                         }
                       }),
-                 
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.04,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, 'trackcountries'),
+                      onTap: () =>
+                          Navigator.pushNamed(context, 'trackcountries'),
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.05,
                         decoration: BoxDecoration(
