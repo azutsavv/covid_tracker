@@ -50,6 +50,14 @@ class _worlds_statsState extends State<worlds_stats>
                             children: [
 
                       PieChart(
+                        legendOptions: const LegendOptions(
+                          legendTextStyle: TextStyle(
+                            color: Colors.white70,
+                          )
+                        ),
+                        centerTextStyle: const TextStyle(
+                          color: Colors.white70
+                        ),
                         chartType: ChartType.ring,
                         chartValuesOptions: const ChartValuesOptions(
                           showChartValuesInPercentage: true,

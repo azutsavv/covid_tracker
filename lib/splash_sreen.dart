@@ -39,37 +39,39 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: Color.fromRGBO(25, 25, 25, 1),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            AnimatedBuilder(
-                animation: _controller,
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/picture/covid.png'),
-                      fit: BoxFit.contain,
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AnimatedBuilder(
+                  animation: _controller,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/picture/covid.png'),
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-                ),
-                builder: (BuildContext context, Widget? child) =>
-                    Transform.rotate(
-                      angle: _controller.value * 2.0 * math.pi,
-                      child: child,
-                    )
-                    ),
-      
-                Container(
-                  alignment: Alignment.center,
-                  child: const Text('Covid-19 \nTracker',
-                    style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,
-                    color: Colors.white60),
-                    textAlign: TextAlign.center,),
-                ),
-          ],
+                  builder: (BuildContext context, Widget? child) =>
+                      Transform.rotate(
+                        angle: _controller.value * 2.0 * math.pi,
+                        child: child,
+                      )
+                      ),
+              
+                  Container(
+                    alignment: Alignment.center,
+                    child: const Text('Covid-19 \nTracker',
+                      style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,
+                      color: Colors.white60),
+                      textAlign: TextAlign.center,),
+                  ),
+            ],
+          ),
         ),
       ),
     );

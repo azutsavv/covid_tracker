@@ -25,47 +25,49 @@ class details_screen extends StatefulWidget {
 class _details_screenState extends State<details_screen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(25, 25, 25, 1),
-      appBar: AppBar(
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: const Color.fromRGBO(25, 25, 25, 1),
-        title: Text(widget.name, style: const TextStyle(color: Colors.white70),),
-        centerTitle: true,
-      ),
-
-      body:
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-                child: Card(
-                  color: Colors.grey.shade800,
-                  child: Column(
-                    children: [
-                      SizedBox(height:MediaQuery.of(context).size.height * 0.05 ,),
-                      reuasble_row(title: 'Cases', value: widget.totalcases.toString(),),
-                      reuasble_row(title: 'Recovered', value: widget.totalRecoverd.toString(),),
-                      reuasble_row(title: 'Active', value: widget.active.toString(),),
-                      reuasble_row(title: 'Critical', value: widget.critical.toString(),),
-                      reuasble_row(title: 'Today Recovered', value: widget.todayRecoeved.toString(),),
-                      reuasble_row(title: 'Test', value: widget.test.toString(),),
-                      
-                       ],
+        appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(25, 25, 25, 1),
+          title: Text(widget.name, style: const TextStyle(color: Colors.white70),),
+          centerTitle: true,
+        ),
+    
+        body:
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+                  child: Card(
+                    color: Colors.grey.shade800,
+                    child: Column(
+                      children: [
+                        SizedBox(height:MediaQuery.of(context).size.height * 0.05 ,),
+                        reuasble_row(title: 'Cases', value: widget.totalcases.toString(),),
+                        reuasble_row(title: 'Recovered', value: widget.totalRecoverd.toString(),),
+                        reuasble_row(title: 'Active', value: widget.active.toString(),),
+                        reuasble_row(title: 'Critical', value: widget.critical.toString(),),
+                        reuasble_row(title: 'Today Recovered', value: widget.todayRecoeved.toString(),),
+                        reuasble_row(title: 'Test', value: widget.test.toString(),),
+                        
+                         ],
+                    ),
                   ),
                 ),
-              ),
-              CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(widget.image),
-                    )
-            ],
-          )
-        ],
+                CircleAvatar(
+                        radius: 50,
+                        backgroundImage: NetworkImage(widget.image),
+                      )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
