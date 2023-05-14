@@ -82,6 +82,7 @@ class _worlds_statsState extends State<worlds_stats>
                                         value: snapshot.data!.cases!.toString(),
                                       ),
                                       reuasble_row(
+                                        
                                           title: "Active",
                                           value: snapshot.data!.active!
                                               .toString()),
